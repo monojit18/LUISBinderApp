@@ -1,0 +1,33 @@
+{
+  "name": "azure_luis_server",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Monojit Datta",
+  "license": "MIT",
+  "main": "AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1",
+  "logs": "logs/AZRLUISServer.log",
+  "contributors": [
+    {
+      "name": "Monojit Datta",
+      "email": "monojit.datta@yahoo.in"
+    }
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1",
+    "install": "npm install --unsafe-perm --save-dev body-parser express stream-buffers url"
+  },
+  "keywords": [
+    "Azure"
+  ],
+  "engines": {
+    "node": ">=8.9.3"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "request": "^2.88.0",
+    "stream-buffers": "^3.0.2",
+    "url": "^0.11.0"
+  }
+}
