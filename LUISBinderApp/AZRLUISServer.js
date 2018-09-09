@@ -11,7 +11,11 @@ class AZRLUISServer
         const BodyParser = require(nodeModulesPathString + "body-parser");
         const Express = require(nodeModulesPathString + "express");
         const AZRConstants = require("./server/commons/AZRConstants");
-        const AZRLUISInterfaceRouter = require("./server/routers/AZRLUISInterfaceRouter");
+        const AZRLUISEntityRouter = require("./server/routers/AZRLUISEntityRouter");
+        const AZRLUISIntentRouter = require("./server/routers/AZRLUISIntentRouter");
+        const AZRLUISPatternRouter = require("./server/routers/AZRLUISPatternRouter");
+        const AZRLUISRoleRouter = require("./server/routers/AZRLUISRoleRouter");
+        const AZRLUISUtterancesRouter = require("./server/routers/AZRLUISUtterancesRouter");
         const LUISBinderProxy = require(nodeModulesPathString + "azure_luis_binder");
 
         const _self = this;
@@ -47,11 +51,54 @@ class AZRLUISServer
 
         };
 
-        var prepareRouters = function()
+        var prepareLUISEntityRouter = function()
         {
             const luisInfo = Express.Router();             
-            new AZRLUISInterfaceRouter(luisInfo, LUISBinderProxy);
+            new AZRLUISEntityRouter(luisInfo, LUISBinderProxy);
             _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareLUISIntentRouter = function()
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISIntentRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareLUISPatternRouter = function()
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISPatternRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareLUISRoleRouter = function()
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISRoleRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareLUISUtterancesRouter = function()
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISUtterancesRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareRouters = function()
+        {
+
+            prepareLUISEntityRouter();
+            prepareLUISIntentRouter();
+            prepareLUISPatternRouter();
+            prepareLUISRoleRouter();
+            prepareLUISUtterancesRouter();
 
         };
 

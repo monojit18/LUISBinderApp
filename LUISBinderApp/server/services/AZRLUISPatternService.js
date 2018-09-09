@@ -3,7 +3,7 @@
 const AZRLUISBaseService = require("./AZRLUISBaseService");
 const Utils = require("../../node_modules/utility_helper");
 
-class AZRLUISUtterancesService extends AZRLUISBaseService
+class AZRLUISPatternService extends AZRLUISBaseService
 {
         
     constructor(routerInfo, azureLUISProxy)
@@ -15,63 +15,13 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.extractLimits = function()
-        {
-
-            let skipLimitString = "";
-            let takeLimitString = "";
-
-            let queryDictionary = request.query;
-            if (Utils.isValidNonEmptyDictionary(queryDictionary) === true)
-            {
-
-                skipLimitString = queryDictionary.skip;
-                takeLimitString = queryDictionary.take;
-
-            }
-
-            let limitInfo = {};
-            limitInfo.skipLimitString = skipLimitString;
-            limitInfo.takeLimitString = takeLimitString;
-            return limitInfo;
-            
-        };
-
     }
 
-    getTrainStatusAsync(responseCallback)
+    getPatternsAsync(responseCallback)
     {
 
         const self = this;
-        this.routerInfo.get("/:versionId/train",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.getTrainStatusAsync(appConfigInfo,
-                                                (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });
-    }
-
-    reviewExamplesAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.get("/:versionId/examples",
+        this.routerInfo.get("/:versionId/patterns",
                             (request, response) =>
         {
 
@@ -86,27 +36,63 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
 
             let queryDictionary = request.query;
             let limitInfo = self.extractLimits(queryDictionary);
-
+            
             let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.reviewExamplesAsync(appConfigInfo, limitInfo
-                                                                .skipLimitString,
-                                                                limitInfo
-                                                                .takeLimitString,
-                                                                (responseBody, error) =>
+            luisBinderProxy.getPatternsAsync(appConfigInfo, limitInfo
+                                                            .skipLimitString,
+                                                            limitInfo
+                                                            .takeLimitString,
+                                                            (responseBody, error) =>
             {
 
                 responseCallback(response, responseBody, error);
                 
             });
         });
-        
     }
-    
-    addLabelsAsync(responseCallback)
+
+    getIntentPatternsAsync(responseCallback)
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/examples",
+        this.routerInfo.get("/:versionId/intents/:intentId/patterns",
+                            (request, response) =>
+        {
+
+            let appConfigInfo = self.prepareAppconfig(request, response);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let intentIdString = request.params.intentId;
+            if (Utils.isNullOrEmptyString(intentIdString) === true)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            luisBinderProxy.getPatternsAsync(appConfigInfo, intentIdString,                                            
+                                            (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });
+    }
+
+    addPatternsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.put("/:versionId/patterns",
                             (request, response) =>
         {
 
@@ -120,7 +106,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
             }
 
             let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.addLabelsAsync(appConfigInfo, request.body,
+            luisBinderProxy.addPatternsAsync(appConfigInfo, request.body,
                                             (responseBody, error) =>
             {
 
@@ -128,13 +114,42 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                 
             });
         });
+        
     }
 
-    deleteLabelsAsync(responseCallback)
+    updatePatternsAsync(responseCallback)
     {
 
         const self = this;
-        this.routerInfo.delete("/:versionId/examples",
+        this.routerInfo.post("/:versionId/patterns",
+                            (request, response) =>
+        {
+
+            let appConfigInfo = self.prepareAppconfig(request, response);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            luisBinderProxy.updatePatternsAsync(appConfigInfo, request.body,
+                                                (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });        
+    }
+
+    deletePatternsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.delete("/:versionId/patterns",
                                 (request, response) =>
         {
 
@@ -148,37 +163,8 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
             }
 
             let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.addLabelsAsync(appConfigInfo, request.body,
-                                            (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });
-        
-    }
-
-    trainApplicationAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.post("/:versionId/train",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.trainApplicationAsync(appConfigInfo,
-                                                    (responseBody, error) =>
+            luisBinderProxy.deletePatternsAsync(appConfigInfo, request.body,
+                                                (responseBody, error) =>
             {
 
                 responseCallback(response, responseBody, error);
@@ -189,4 +175,4 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     
 }
 
-module.exports = AZRLUISUtterancesService;
+module.exports = AZRLUISPatternService;

@@ -74,6 +74,28 @@ class AZRLUISBaseService
             return appConfigInfo;
             
         };
+
+        this.extractLimits = function()
+        {
+
+            let skipLimitString = "";
+            let takeLimitString = "";
+
+            let queryDictionary = request.query;
+            if (Utils.isValidNonEmptyDictionary(queryDictionary) === true)
+            {
+
+                skipLimitString = queryDictionary.skip;
+                takeLimitString = queryDictionary.take;
+
+            }
+
+            let limitInfo = {};
+            limitInfo.skipLimitString = skipLimitString;
+            limitInfo.takeLimitString = takeLimitString;
+            return limitInfo;
+            
+        };
         
         this.processArgumentNullErrorResponse = function(response, responseCallback)
         {
