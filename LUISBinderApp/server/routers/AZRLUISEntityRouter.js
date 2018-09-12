@@ -17,7 +17,7 @@ class AZRLUISEntityRouter extends AZRLUISBaseRouter
             let luisEntityService = new AZRLUISEntityService(routerInfo, AZRLUISProxy);
             luisEntityService.createEntityAsync(this.responseCallback);
             luisEntityService.getEntityAsync(this.responseCallback);
-            luisEntityService.updateEntityAsync(this.responseCallback);
+            luisEntityService.renameEntityAsync(this.responseCallback);
             luisEntityService.deleteEntityAsync(this.responseCallback);
             
             

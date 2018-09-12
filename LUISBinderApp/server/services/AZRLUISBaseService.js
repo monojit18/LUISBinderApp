@@ -44,7 +44,7 @@ class AZRLUISBaseService
             
         };
 
-        this.prepareAppconfig = function(request, response)
+        this.prepareAppconfig = function(request, response, responseCallback)
         {
 
             if ((request === null) || (request === undefined))

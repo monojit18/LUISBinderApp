@@ -47,7 +47,8 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -75,7 +76,8 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -110,7 +112,8 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -138,7 +141,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                                 (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -167,7 +170,8 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response,
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 

@@ -21,7 +21,8 @@ class AZRLUISIntentService extends AZRLUISBaseService
                                                 response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -64,7 +65,8 @@ class AZRLUISIntentService extends AZRLUISBaseService
                                                     response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -89,7 +91,8 @@ class AZRLUISIntentService extends AZRLUISBaseService
                                                         response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -133,7 +136,8 @@ class AZRLUISIntentService extends AZRLUISBaseService
                                                     response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -245,6 +249,56 @@ class AZRLUISIntentService extends AZRLUISBaseService
             self.performCreateIntentAsync(luisBinderProxy,
                                             luisBinderProxy.entityOptions
                                                             .KPrebuiltIntents,
+                                                            request, response,
+                                                            responseCallback);            
+        });
+    }
+
+    renameIntentAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.post("/:versionId/intents/:intentId/rename",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            self.performUpdateIntentAsync(luisBinderProxy,
+                                            luisBinderProxy.entityOptions
+                                                            .KIntent,
+                                                            request, response,
+                                                            responseCallback);            
+        });
+    }
+
+    deleteIntentAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.delete("/:versionId/intents/:intentId/delete",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            self.performDeleteIntentAsync(luisBinderProxy,
+                                            luisBinderProxy.entityOptions
+                                                            .KIntent,
                                                             request, response,
                                                             responseCallback);            
         });

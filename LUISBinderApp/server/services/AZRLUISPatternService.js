@@ -25,7 +25,8 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -59,7 +60,8 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -92,11 +94,12 @@ class AZRLUISPatternService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/patterns",
+        this.routerInfo.put("/:versionId/patterns/create",
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -121,11 +124,12 @@ class AZRLUISPatternService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.post("/:versionId/patterns",
+        this.routerInfo.post("/:versionId/patterns/update",
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -149,11 +153,12 @@ class AZRLUISPatternService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.delete("/:versionId/patterns",
+        this.routerInfo.delete("/:versionId/patterns/delete",
                                 (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response);
+            let appConfigInfo = self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 

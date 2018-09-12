@@ -17,7 +17,9 @@ class AZRLUISIntentRouter extends AZRLUISBaseRouter
             let luisIntentService = new AZRLUISIntentService(routerInfo, AZRLUISProxy);
             luisIntentService.createIntentAsync(this.responseCallback);
             luisIntentService.createPrebuiltIntentAsync(this.responseCallback);
-            luisIntentService.getIntentAsync(this.responseCallback);            
+            luisIntentService.getIntentAsync(this.responseCallback);
+            luisIntentService.renameIntentAsync(this.responseCallback);
+            luisIntentService.deleteIntentAsync(this.responseCallback);
             
         };
 

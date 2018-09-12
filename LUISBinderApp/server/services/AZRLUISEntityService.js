@@ -21,7 +21,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                 response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -64,7 +65,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                     response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -89,7 +91,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                     response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -133,7 +136,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                     response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -176,7 +180,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                         response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -220,7 +225,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                         response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -273,7 +279,8 @@ class AZRLUISEntityService extends AZRLUISBaseService
                                                         response, responseCallback)
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppconfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -370,11 +377,11 @@ class AZRLUISEntityService extends AZRLUISBaseService
         });
     }
 
-    updateEntityAsync(responseCallback)
+    renameEntityAsync(responseCallback)
     {
 
         const self = this;
-        this.routerInfo.post("/:versionId/entities/:entityId/update",
+        this.routerInfo.post("/:versionId/entities/:entityId/rename",
                             (request, response) =>
         {
 
