@@ -431,5 +431,70 @@
 6. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/delete<br/>
    **DELETE request-**
    
+7. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/create<br/>
+   **PUT request body-**
 
+  ```
+     {
+          "name": "sample role"
+     }
+    
+  ```
+8. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/update<br/>
+   **POST request body-**
+
+  ```
+     {
+          "name": "new role name"
+     }
+    
+  ```
+  
+9. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/delete<br/>
+   **DELETE request-**
+   
+10. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/create<br/>
+    **PUT request body-**
+
+  ```
+     {
+          "name": "sample role"
+     }
+    
+  ```
+11. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/update<br/>
+    **POST request body-**
+
+  ```
+     {
+          "name": "new role name"
+     }
+    
+  ```
+  
+12. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/delete<br/>
+    **DELETE request-**
+    
+13. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/create<br/>
+    **PUT request body-**
+
+  ```
+     {
+          "name": "sample role"
+     }
+    
+  ```
+14. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/update<br/>
+    **POST request body-**
+
+  ```
+     {
+          "name": "new role name"
+     }
+    
+  ```
+  
+15. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/delete<br/>
+    **DELETE request-**
+   
 
