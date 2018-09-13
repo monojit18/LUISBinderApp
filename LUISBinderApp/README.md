@@ -269,7 +269,7 @@
     
   ```
 
-  ## Intent APIs
+  ## Utterances APIs
   
 1.  **URL** - https://<host_server_details>/luis/:versionId/patterns<br/>
     **GET request-**
@@ -283,10 +283,49 @@
 4.  **URL** - https://<host_server_details>/luis/:versionId/examples<br/>
     **GET request-**
     
-5.  **URL** - https://<host_server_details>/luis/:versionId/examples<br/>
-    **GET request-**
+5. **URL** - https://<host_server_details>/luis/:versionId/labels/create<br/>
+   **PUT request body-**
+
+  ```
+    [
+      {
+        "text": "Book me a flight from Cairo to Redmond next Thursday",
+        "intentName": "BookFlight",
+        "entityLabels":
+        [
+          {
+            "entityName": "Location::From",
+            "startCharIndex": 22,
+            "endCharIndex": 26
+          },
+          {
+            "entityName": "Location::To",
+            "startCharIndex": 31,
+            "endCharIndex": 37
+          }
+        ]
+      },
+      {
+        "text": "What's the weather like in Seattle?",
+        "intentName": "GetWeather",
+        "entityLabels":
+        [
+          {
+            "entityName": "Location",
+            "startCharIndex": 27,
+            "endCharIndex": 33
+          }
+        ]
+      }
+    ]
     
-6. **URL** - https://<host_server_details>/luis/:versionId/patterns/create<br/>
+  ```
+  
+6. **URL** - https://<host_server_details>/luis/:versionId/labels/delete<br/>
+   **DELETE request-**
+   
+    
+7. **URL** - https://<host_server_details>/luis/:versionId/patterns/create<br/>
    **PUT request body-**
 
   ```
@@ -303,7 +342,7 @@
     
   ```
     
-6. **URL** - https://<host_server_details>/luis/:versionId/patterns/update<br/>
+8. **URL** - https://<host_server_details>/luis/:versionId/patterns/update<br/>
    **POST request body-**
 
   ```
@@ -322,8 +361,23 @@
     
   ```
 
-7. **URL** - https://<host_server_details>/luis/:versionId/patterns/delete<br/>
+9. **URL** - https://<host_server_details>/luis/:versionId/patterns/delete<br/>
    **DELETE request-**
     
+10. **URL** - https://<host_server_details>/luis/:versionId/train<br/>
+    **POST request body-**
 
+  ```
+     {
+          "statusId": 9,
+          "status": "Queued"
+     }
+      OR
+
+     {
+          "statusId": 2,
+          "status": "UpToDate"
+     }
     
+  ```
+  
