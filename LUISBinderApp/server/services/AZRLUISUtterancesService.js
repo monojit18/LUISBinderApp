@@ -108,7 +108,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/examples",
+        this.routerInfo.put("/:versionId/labels/create",
                             (request, response) =>
         {
 
@@ -137,7 +137,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.delete("/:versionId/examples",
+        this.routerInfo.delete("/:versionId/labels/delete",
                                 (request, response) =>
         {
 
@@ -160,6 +160,91 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
             });
         });
         
+    }
+
+    addPatternsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.put("/:versionId/patterns/create",
+                            (request, response) =>
+        {
+
+            let appConfigInfo = self.prepareAppconfig(request, response);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            luisBinderProxy.addPatternsAsync(appConfigInfo, request.body,
+                                            (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });
+        
+    }
+
+    updatePatternsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.post("/:versionId/patterns/update",
+                            (request, response) =>
+        {
+
+            let appConfigInfo = self.prepareAppconfig(request, response);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            luisBinderProxy.updatePatternsAsync(appConfigInfo, request.body,
+                                                (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });        
+    }
+
+    deletePatternsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.delete("/:versionId/patterns/delete",
+                                (request, response) =>
+        {
+
+            let appConfigInfo = self.prepareAppconfig(request, response);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.pepareLUISClient(request);
+            luisBinderProxy.deletePatternsAsync(appConfigInfo, request.body,
+                                                (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });        
     }
 
     trainApplicationAsync(responseCallback)
