@@ -155,7 +155,7 @@
     ```
     
 13.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete<br/>
-     **DELETE request body-**
+     **DELETE request-**
 
 14.  **URL** - https://<host_server_details>/luis/:versionId/entities/sublists/create<br/>
      **PUT request body-**
@@ -216,7 +216,7 @@
     ``` 
     
 19.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete<br/>
-     **DELETE request body-**
+     **DELETE request-**
 
     
 20.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/create<br/>
@@ -240,6 +240,89 @@
     ``` 
     
 22.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete<br/>
-     **POST request body-**
+     **DELETE request-**
+    
+  ## Intent APIs
+  
+1. **URL** - https://<host_server_details>/luis/:versionId/intents/:intentId<br/>
+   **GET request-**
+
+2. **URL** - https://<host_server_details>/luis/:versionId/intents/create<br/>
+   **PUT request body-**
+
+    ```
+     {
+        "name" : "intent1"
+     }
+    
+    ``` 
+
+3. **URL** - https://<host_server_details>/luis/:versionId/prebuiltIntents/create<br/>
+   **PUT request body-**
+
+    ```
+     {
+        "domainName": "Camera",
+        "modelName": "CapturePhoto"
+     }
+    
+    ```
+
+  ## Intent APIs
+  
+1.  **URL** - https://<host_server_details>/luis/:versionId/patterns<br/>
+    **GET request-**
+    
+2.  **URL** - https://<host_server_details>/luis/:versionId/intents/:intentId/patterns<br/>
+    **GET request-**
+    
+3.  **URL** - https://<host_server_details>/luis/:versionId/train<br/>
+    **GET request-**
+    
+4.  **URL** - https://<host_server_details>/luis/:versionId/examples<br/>
+    **GET request-**
+    
+5.  **URL** - https://<host_server_details>/luis/:versionId/examples<br/>
+    **GET request-**
+    
+6. **URL** - https://<host_server_details>/luis/:versionId/patterns/create<br/>
+   **PUT request body-**
+
+    ```
+     [
+        {
+            "pattern": "Who's reporting to {Name}",
+            "intent": "report to name"
+        },
+        {
+            "pattern": "Who's {Name} reporting to?",
+            "intent": "name report to"
+        }
+    ]
+    
+    ```
+    
+6. **URL** - https://<host_server_details>/luis/:versionId/patterns/update<br/>
+   **POST request body-**
+
+    ```
+     [
+        {
+            "id": "16cfbc93-4065-445f-b06e-00cebdae11c4",
+            "pattern": "Who's reporting to {Name}",
+            "intent": "new intent"
+        },
+        {
+            "id": "1d026f03-5942-4d0d-9153-1c01301e1429",
+            "pattern": "Who's {Name} reporting to?",
+            "intent": "new intent"
+        }
+    ]
+    
+    ```
+
+7. **URL** - https://<host_server_details>/luis/:versionId/patterns/delete<br/>
+   **DELETE request-**
     
 
+    
