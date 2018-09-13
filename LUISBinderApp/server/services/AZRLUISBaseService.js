@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 const AZRConstants = require("../commons/AZRConstants");
-const Utils = require("../../node_modules/utility_helper");
+const Utils = require("../commons/utility_helper");
 
 class AZRLUISBaseService
 {
