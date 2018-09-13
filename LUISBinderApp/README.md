@@ -137,22 +137,22 @@
 11.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/create<br/>
      **PUT request body-**
 
-    ```
+  ```
      {
         "name" : "To"
      }
     
-    ```
+  ```
     
 12.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/update<br/>
      **POST request body-**
 
-    ```
+  ```
      {
         "name" : "Source"
      }
     
-    ```
+  ```
     
 13.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete<br/>
      **DELETE request-**
@@ -160,7 +160,7 @@
 14.  **URL** - https://<host_server_details>/luis/:versionId/entities/sublists/create<br/>
      **PUT request body-**
 
-    ```
+  ```
      {
         "canonicalForm": "BankName",
         "list": [
@@ -169,12 +169,12 @@
         ]
      }
     
-    ```
+  ```
 
 15.  **URL** - https://<host_server_details>/luis/:versionId/entities/sublists/create<br/>
      **PUT request body-**
 
-    ```
+  ```
      {
         "canonicalForm": "BankName",
         "list": [
@@ -183,37 +183,37 @@
         ]
      }
     
-    ```
+  ```
     
 16.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create<br/>
      **PUT request body-**
 
-    ```
+  ```
      {
         "name" : "datetime"
      }
     
-    ``` 
+  ``` 
     
 17.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create<br/>
      **PUT request body-**
 
-    ```
+  ```
      {
         "name" : "datetime"
      }
     
-    ``` 
+  ``` 
     
 18.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/update<br/>
      **POST request body-**
-
-    ```
+     
+  ```
      {
         "name" : "datetime"
      }
     
-    ``` 
+  ``` 
     
 19.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete<br/>
      **DELETE request-**
@@ -221,23 +221,24 @@
     
 20.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/create<br/>
      **PUT request body-**
-
-    ```
+     
+  ```
      {
         "name" : "To"
      }
     
-    ```
+  ```
+    
     
 21.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/update<br/>
      **POST request body-**
 
-    ```
+  ```
      {
         "name" : "Source"
      }
     
-    ``` 
+  ``` 
     
 22.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete<br/>
      **DELETE request-**
@@ -250,23 +251,23 @@
 2. **URL** - https://<host_server_details>/luis/:versionId/intents/create<br/>
    **PUT request body-**
 
-    ```
+  ```
      {
         "name" : "intent1"
      }
     
-    ``` 
+  ``` 
 
 3. **URL** - https://<host_server_details>/luis/:versionId/prebuiltIntents/create<br/>
    **PUT request body-**
 
-    ```
+  ```
      {
         "domainName": "Camera",
         "modelName": "CapturePhoto"
      }
     
-    ```
+  ```
 
   ## Intent APIs
   
@@ -288,7 +289,7 @@
 6. **URL** - https://<host_server_details>/luis/:versionId/patterns/create<br/>
    **PUT request body-**
 
-    ```
+  ```
      [
         {
             "pattern": "Who's reporting to {Name}",
@@ -300,12 +301,12 @@
         }
     ]
     
-    ```
+  ```
     
 6. **URL** - https://<host_server_details>/luis/:versionId/patterns/update<br/>
    **POST request body-**
 
-    ```
+  ```
      [
         {
             "id": "16cfbc93-4065-445f-b06e-00cebdae11c4",
@@ -319,7 +320,7 @@
         }
     ]
     
-    ```
+  ```
 
 7. **URL** - https://<host_server_details>/luis/:versionId/patterns/delete<br/>
    **DELETE request-**
