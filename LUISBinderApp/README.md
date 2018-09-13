@@ -11,150 +11,235 @@
    **URL** - https://<host_server_details> <br/>
    **GET request-**
   
-  ## APIs
-1.  **URL** - https://<host_server_details>/qnamaker/knowledgebases/all<br/>
-    **GET request-**
-    
-2.  **URL** - https://<host_server_details>/qnamaker/knowledgebases/details/:kbId<br/>
+  ## Entity APIs
+1.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId<br/>
     **GET request-**
 
-3.  **URL** - https://<host_server_details>/qnamaker/endpointkeys<br/>
-    **GET request-**
-
-4.  **URL** - https://<host_server_details>/qnamaker/operations/:operationId<br/>
-    **GET request-**
-
-5.  **URL** - https://<host_server_details>/qnamaker/knowledgebase/download/:kbId/:environmentId<br/>
-    **GET request-**
-
-6.  **URL** - https://<host_server_details>/qnamaker/alterations<br/>
-    **GET request-**
-
-7.  **URL** - https://<host_server_details>/qnamaker/knowledgebase/create<br/>
+2.  **URL** - https://<host_server_details>/luis/:versionId/entities/create<br/>
     **PUT request body-**
 
     ```
-      {
-        "name": "QnA Maker New FAQ - 1109",
-        "qnaList": [
-          {
-            "id": 0,
-            "answer": "Feeling good!!!",
-            "source": "",
-            "questions": [
-              "Sports?"
-            ],
-            "metadata": []
-          }
-        ]
-      }
+     {
+         "name": "DayOfWeek"
+     }
 
     ```
     
-   8. **URL** - https://<host_server_details>/qnamaker/knowledgebase/createandpublish<br/>
-      **PUT request body-**
-    
-    ```
-      {
-        "name": "QnA Maker New FAQ - 1708(2)",
-        "qnaList": [
-          {
-            "id": 0,
-            "answer": "Feeling good!!!",
-            "source": "",
-            "questions": [
-              "Any Venetarian options you have?"
-            ],
-            "metadata": []
-          }
-        ]
-      }
-    
-    ```
-    
- 9. **URL** - https://<host_server_details>/qnamaker/knowledgebase/:kbId/publish<br/>
-    **PUT request-**
-  
-    
-10. **URL** - https://<host_server_details>/qnamaker/knowledgebase/:kbId/update<br/>
+3.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/update<br/>
     **POST request body-**
-    
+
     ```
-      {
-          "update":
-          {
-            "questions":
-            [
-              "Do you have any vegetarian options today?"
-            ]
-          }
-      }
-    
-    ```  
-    
-11. **URL** - https://<host_server_details>/qnamaker/endpointkeys/:keyType/refresh<br/>
-    **POST request-**
-    
-    
-12. **URL** - https://<host_server_details>/qnamaker/knowledgebases/:kbId/replace<br/>
-    **POST request body-**
-    
+     {
+         "name": "DayOfWeek"
+     }
+
     ```
-      {
-        "qnAList": [
-          {
-            "id": 0,
-            "answer": "string",
-            "source": "string",
-            "questions": [
-              "string"
-            ],
-            "metadata": [
-              {
-                "name": "string",
-                "value": "string"
-              }
-            ]
-          }
-        ]
-      }
     
-    ``` 
-    
-13. **URL** - https://<host_server_details>/qnamaker/alterations/replace<br/>
-    **POST request body-**
-    
-    ```
-      {
-        "wordAlterations": [
-          {
-            "alterations": [
-              "qnamaker",
-              "qna maker"
-            ]
-          },
-          {
-            "alterations": [
-              "botframework",
-              "bot framework"
-            ]
-          },
-          {
-            "alterations": [
-              "webchat",
-              "web chat"
-            ]
-          }
-        ]
-      }
-    
-    ``` 
-    
-14. **URL** - https://<host_server_details>/qnamaker/knowledgebases/delete/:kbId<br/>
+4.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/delete<br/>
     **DELETE request-**
+
+5.  **URL** - https://<host_server_details>/luis/:versionId/entities/composite/create<br/>
+    **PUT request body-**
+
+    ```
+     {
+        "name": "Reservation",
+        "children": [ "Location::To", "datetime" ]
+    }
+
+    ```
+    
+6.  **URL** - https://<host_server_details>/luis/:versionId/entities/composite/:entityId/update<br/>
+    **POST request body-**
+
+    ```
+     {
+        "name": "Reservation",
+        "children": [ "Location::To" ]
+        
+    }
+    
+    ```
+    
+7.  **URL** - https://<host_server_details>/luis/:versionId/entities/composite/:entityId/delete<br/>
+    **DELETE request-**
+    
+8.  **URL** - https://<host_server_details>/luis/:versionId/entities/list/create<br/>
+    **PUT request body-**
+
+    ```
+     {
+        "name": "States",
+        "sublists": 
+        [
+          {
+            "canonicalForm": "New York",
+            "list": [ "NY", "New York" ]
+          },
+          {
+            "canonicalForm": "Washington",
+            "list": [ "Washington", "WA" ]
+          },
+          {
+            "canonicalForm": "California",
+            "list": [ "California", "CA", "Calif.", "Cal." ]
+          }
+        ]
+     }
+    
+    ```
+    
+9.  **URL** - https://<host_server_details>/luis/:versionId/entities/list/:entityId/update<br/>
+    **POST request body-**
+
+    ```
+     {
+        "name": "States",
+        "subLists": [
+          {
+            "canonicalForm": "new york",
+            "list": [
+              "ny",
+              "new york"
+            ]
+          },
+          {
+            "canonicalForm": "washington",
+            "list": [
+              "washington",
+              "wa"
+            ]
+          },
+          {
+            "canonicalForm": "california",
+            "list": [
+              "california",
+              "ca",
+              "calif.",
+              "cal."
+            ]
+          },
+          {
+            "canonicalForm": "Texas",
+            "list": [
+              "Texas",
+              "TX"
+            ]
+          }
+        ]
+     }
+    
+    ```
+
+10.  **URL** - https://<host_server_details>/luis/:versionId/entities/list/:entityId/delete<br/>
+     **DELETE request-**
+
+11.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "name" : "To"
+     }
+    
+    ```
+    
+12.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/update<br/>
+     **POST request body-**
+
+    ```
+     {
+        "name" : "Source"
+     }
+    
+    ```
+    
+13.  **URL** - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete<br/>
+     **DELETE request body-**
+
+14.  **URL** - https://<host_server_details>/luis/:versionId/entities/sublists/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "canonicalForm": "BankName",
+        "list": [
+          "HSBC",
+          "CitiBank"
+        ]
+     }
+    
+    ```
+
+15.  **URL** - https://<host_server_details>/luis/:versionId/entities/sublists/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "canonicalForm": "BankName",
+        "list": [
+          "HSBC",
+          "CitiBank"
+        ]
+     }
+    
+    ```
+    
+16.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "name" : "datetime"
+     }
+    
+    ``` 
+    
+17.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "name" : "datetime"
+     }
+    
+    ``` 
+    
+18.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/update<br/>
+     **POST request body-**
+
+    ```
+     {
+        "name" : "datetime"
+     }
+    
+    ``` 
+    
+19.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete<br/>
+     **DELETE request body-**
+
+    
+20.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/create<br/>
+     **PUT request body-**
+
+    ```
+     {
+        "name" : "To"
+     }
+    
+    ```
+    
+21.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/update<br/>
+     **POST request body-**
+
+    ```
+     {
+        "name" : "Source"
+     }
+    
+    ``` 
+    
+22.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete<br/>
+     **POST request body-**
     
 
-15. **URL** - https://<host_server_details>/qnamaker/knowledgebases/all/delete<br/>
-    **DELETE request-**
-    
-    
