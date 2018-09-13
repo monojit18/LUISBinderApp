@@ -642,7 +642,7 @@ class AZRLUISEntityService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/entities/sublists",
+        this.routerInfo.put("/:versionId/entities/sublists/create",
                             (request, response) =>
         {
 

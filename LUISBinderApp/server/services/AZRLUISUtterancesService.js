@@ -178,7 +178,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/examples",
+        this.routerInfo.put("/:versionId/labels/create",
                             (request, response) =>
         {
 
@@ -206,7 +206,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.delete("/:versionId/examples",
+        this.routerInfo.delete("/:versionId/labels/delete",
                                 (request, response) =>
         {
 
@@ -235,7 +235,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/patterns",
+        this.routerInfo.put("/:versionId/patterns/create",
                             (request, response) =>
         {
 
@@ -264,7 +264,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.post("/:versionId/patterns",
+        this.routerInfo.post("/:versionId/patterns/update",
                             (request, response) =>
         {
 
@@ -292,7 +292,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.delete("/:versionId/patterns",
+        this.routerInfo.delete("/:versionId/patterns/delete",
                                 (request, response) =>
         {
 
