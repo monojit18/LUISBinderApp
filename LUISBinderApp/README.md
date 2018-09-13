@@ -381,3 +381,55 @@
     
   ```
   
+  ## Role APIs
+  
+1.  **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/:roleId<br/>
+    **GET request-**
+    
+2. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/create<br/>
+   **PUT request body-**
+
+  ```
+     {
+          "name": "sample role"
+     }
+    
+  ```
+  
+2. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/update<br/>
+   **POST request body-**
+
+  ```
+     {
+          "name": "new role name"
+     }
+    
+  ```
+  
+3. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/delete<br/>
+   **DELETE request-**
+   
+4. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/create<br/>
+   **PUT request body-**
+
+  ```
+     {
+          "name": "sample role"
+     }
+    
+  ```
+5. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/update<br/>
+   **POST request body-**
+
+  ```
+     {
+          "name": "new role name"
+     }
+    
+  ```
+  
+6. **URL** - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/delete<br/>
+   **DELETE request-**
+   
+
+
