@@ -6,16 +6,16 @@ class AZRLUISServer
     constructor()
     {
                 
-        const nodeModulesPathString = "./node_modules/";  
+        const nodeModulesPathString = "../node_modules/";  
         const Http = require("http");
         const BodyParser = require(nodeModulesPathString + "body-parser");
         const Express = require(nodeModulesPathString + "express");
-        const AZRConstants = require("./server/commons/AZRConstants");
-        const AZRLUISEntityRouter = require("./server/routers/AZRLUISEntityRouter");
-        const AZRLUISIntentRouter = require("./server/routers/AZRLUISIntentRouter");
-        const AZRLUISPatternRouter = require("./server/routers/AZRLUISPatternRouter");
-        const AZRLUISRoleRouter = require("./server/routers/AZRLUISRoleRouter");
-        const AZRLUISUtterancesRouter = require("./server/routers/AZRLUISUtterancesRouter");
+        const AZRConstants = require("./commons/AZRConstants");
+        const AZRLUISEntityRouter = require("./routers/AZRLUISEntityRouter");
+        const AZRLUISIntentRouter = require("./routers/AZRLUISIntentRouter");
+        const AZRLUISPatternRouter = require("./routers/AZRLUISPatternRouter");
+        const AZRLUISRoleRouter = require("./routers/AZRLUISRoleRouter");
+        const AZRLUISUtterancesRouter = require("./routers/AZRLUISUtterancesRouter");
         const LUISBinderProxy = require(nodeModulesPathString + "azure_luis_binder");
 
         const _self = this;
