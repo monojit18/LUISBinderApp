@@ -11,7 +11,7 @@ class AZRLUISRoleRouter extends AZRLUISBaseRouter
         
         super();
         
-        this.prepareLUISRoleService = function()
+        this.prepareLUISRoleService = () =>
         {
             
             let luisRoleService = new AZRLUISRoleService(routerInfo, AZRLUISProxy);

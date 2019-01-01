@@ -9,7 +9,7 @@ class AZRLUISBaseRouter
     {
         
         const self = this;
-        this.responseCallback = function(response, result, error)
+        this.responseCallback = (response, result, error) =>
         {
 
             if (error != null)
@@ -24,7 +24,7 @@ class AZRLUISBaseRouter
 
         };
         
-        this.processErrorResponse = function(error, response)
+        this.processErrorResponse = (error, response) =>
         {
             
             response.status = AZRConstants.HttpStatusCodes.KBadRequest;
@@ -32,7 +32,7 @@ class AZRLUISBaseRouter
             
         };
         
-        this.processSuccessResponse = function(response, result)
+        this.processSuccessResponse = (response, result) =>
         {
             
             response.status = AZRConstants.HttpStatusCodes.KSuccess;

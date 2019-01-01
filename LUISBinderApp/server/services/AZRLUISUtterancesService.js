@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
+// const Utils = require("../commons/Utils");
 const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISUtterancesService extends AZRLUISBaseService
@@ -11,61 +12,10 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
         
         super(routerInfo, azureLUISProxy);
         
-        const _self = this;        
+        const _self = this;
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.extractLimits = function()
-        {
-
-            let skipLimitString = "";
-            let takeLimitString = "";
-
-            let queryDictionary = request.query;
-            if (Utils.isValidNonEmptyDictionary(queryDictionary) === true)
-            {
-
-                skipLimitString = queryDictionary.skip;
-                takeLimitString = queryDictionary.take;
-
-            }
-
-            let limitInfo = {};
-            limitInfo.skipLimitString = skipLimitString;
-            limitInfo.takeLimitString = takeLimitString;
-            return limitInfo;
-            
-        };
-
-    }
-
-    getTrainStatusAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.get("/:versionId/train",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response, 
-                                                        responseCallback);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.getTrainStatusAsync(appConfigInfo,
-                                                (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });
     }
 
     reviewExamplesAsync(responseCallback)
@@ -89,7 +39,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
             let queryDictionary = request.query;
             let limitInfo = self.extractLimits(queryDictionary);
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.reviewExamplesAsync(appConfigInfo, limitInfo
                                                                 .skipLimitString,
                                                                 limitInfo
@@ -122,7 +72,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.addLabelsAsync(appConfigInfo, request.body,
                                             (responseBody, error) =>
             {
@@ -150,7 +100,7 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.addLabelsAsync(appConfigInfo, request.body,
                                             (responseBody, error) =>
             {
@@ -161,121 +111,6 @@ class AZRLUISUtterancesService extends AZRLUISBaseService
         });
         
     }
-
-    addPatternsAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.put("/:versionId/patterns/create",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.addPatternsAsync(appConfigInfo, request.body,
-                                            (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });
-        
-    }
-
-    updatePatternsAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.post("/:versionId/patterns/update",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.updatePatternsAsync(appConfigInfo, request.body,
-                                                (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });        
-    }
-
-    deletePatternsAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.delete("/:versionId/patterns/delete",
-                                (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.deletePatternsAsync(appConfigInfo, request.body,
-                                                (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });        
-    }
-
-    trainApplicationAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.post("/:versionId/train",
-                            (request, response) =>
-        {
-
-            let appConfigInfo = self.prepareAppconfig(request, response,
-                                                        responseCallback);
-            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.trainApplicationAsync(appConfigInfo,
-                                                    (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });        
-    }
-    
 }
 
 module.exports = AZRLUISUtterancesService;

@@ -16,13 +16,15 @@ class AZRLUISServer
         const AZRLUISPatternRouter = require("./routers/AZRLUISPatternRouter");
         const AZRLUISRoleRouter = require("./routers/AZRLUISRoleRouter");
         const AZRLUISUtterancesRouter = require("./routers/AZRLUISUtterancesRouter");
+        const AZRLUISTrainRouter = require("./routers/AZRLUISTrainRouter");
+        const AZRLUISPredictionRouter = require("./routers/AZRLUISPredictionRouter");
         const LUISBinderProxy = require(nodeModulesPathString + "azure_luis_binder");
 
         const _self = this;
         let _express = Express();
         let _httpServer = Http.createServer(_express);
         
-        var prepareServer = function()
+        var prepareServer = () =>
         {
 
             _express.use(BodyParser.json
@@ -37,9 +39,12 @@ class AZRLUISServer
                 extended: true
 
             }));
+
+            _express.use(BodyParser.text());
+            
         };
         
-        var prepareDefaultResponse = function()
+        var prepareDefaultResponse = () =>
         {
             
             _express.get("/", (request, response) =>
@@ -51,7 +56,7 @@ class AZRLUISServer
 
         };
 
-        var prepareLUISEntityRouter = function()
+        var prepareLUISEntityRouter = () =>
         {
             const luisInfo = Express.Router();             
             new AZRLUISEntityRouter(luisInfo, LUISBinderProxy);
@@ -59,7 +64,7 @@ class AZRLUISServer
 
         };
 
-        var prepareLUISIntentRouter = function()
+        var prepareLUISIntentRouter = () =>
         {
             const luisInfo = Express.Router();             
             new AZRLUISIntentRouter(luisInfo, LUISBinderProxy);
@@ -67,7 +72,7 @@ class AZRLUISServer
 
         };
 
-        var prepareLUISPatternRouter = function()
+        var prepareLUISPatternRouter = () =>
         {
             const luisInfo = Express.Router();             
             new AZRLUISPatternRouter(luisInfo, LUISBinderProxy);
@@ -75,7 +80,7 @@ class AZRLUISServer
 
         };
 
-        var prepareLUISRoleRouter = function()
+        var prepareLUISRoleRouter = () =>
         {
             const luisInfo = Express.Router();             
             new AZRLUISRoleRouter(luisInfo, LUISBinderProxy);
@@ -83,7 +88,7 @@ class AZRLUISServer
 
         };
 
-        var prepareLUISUtterancesRouter = function()
+        var prepareLUISUtterancesRouter = () =>
         {
             const luisInfo = Express.Router();             
             new AZRLUISUtterancesRouter(luisInfo, LUISBinderProxy);
@@ -91,7 +96,23 @@ class AZRLUISServer
 
         };
 
-        var prepareRouters = function()
+        var prepareLUISTrainRouter = () =>
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISTrainRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareLUISPredictionRouter = () =>
+        {
+            const luisInfo = Express.Router();             
+            new AZRLUISPredictionRouter(luisInfo, LUISBinderProxy);
+            _express.use("/luis", luisInfo);
+
+        };
+
+        var prepareRouters = () =>
         {
 
             prepareLUISEntityRouter();
@@ -99,23 +120,25 @@ class AZRLUISServer
             prepareLUISPatternRouter();
             prepareLUISRoleRouter();
             prepareLUISUtterancesRouter();
+            prepareLUISTrainRouter();
+            prepareLUISPredictionRouter();
 
         };
 
-        var bindServer = function()
+        var bindServer = () =>
         {
 
             const port = (process.env.PORT || 7011);
             const host = "0.0.0.0"; // for server to be accessible from within Docker swarm
             
-           _httpServer.listen(port, host, function ()
+           _httpServer.listen(port, host, () =>
             {
 
                 console.log(`We have started our server on port ${_httpServer.address().port}`);
 
             });
 
-            _httpServer.on("close", function ()
+            _httpServer.on("close", () =>
             {
 
                 console.log("We are Closing");    
@@ -123,7 +146,7 @@ class AZRLUISServer
 
             });
 
-            process.on("SIGINT", function()
+            process.on("SIGINT", () =>
             {
                 _httpServer.close();
 

@@ -11,7 +11,7 @@ class AZRLUISPatternRouter extends AZRLUISBaseRouter
         
         super();
         
-        this.prepareLUISPatternService = function()
+        this.prepareLUISPatternService = () =>
         {
             
             let luisIntentService = new AZRLUISPatternService(routerInfo,

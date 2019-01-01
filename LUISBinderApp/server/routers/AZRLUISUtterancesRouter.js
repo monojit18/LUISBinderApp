@@ -11,17 +11,16 @@ class AZRLUISUtterancesRouter extends AZRLUISBaseRouter
         
         super();
         
-        this.prepareLUISUtterancesService = function()
+        this.prepareLUISUtterancesService = () =>
         {
             
-            let luisInterfaceService = new AZRLUISUtterancesService(routerInfo,
-                                                                    AZRLUISProxy);
-            luisInterfaceService.getTrainStatusAsync(this.responseCallback);
-            luisInterfaceService.reviewExamplesAsync(this.responseCallback);            
-            luisInterfaceService.addLabelsAsync(this.responseCallback);
-            luisInterfaceService.deleteLabelsAsync(this.responseCallback);            
-            luisInterfaceService.trainApplicationAsync(this.responseCallback);
+            let luisUtterancesService = new AZRLUISUtterancesService(routerInfo,
+                                                                        AZRLUISProxy);
             
+            luisUtterancesService.reviewExamplesAsync(this.responseCallback);
+            luisUtterancesService.addLabelsAsync(this.responseCallback);
+            luisUtterancesService.deleteLabelsAsync(this.responseCallback);
+
         };
 
         this.prepareLUISUtterancesService();

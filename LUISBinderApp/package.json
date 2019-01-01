@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save-dev body-parser express azure_luis_binder"
+    "install": "npm install --unsafe-perm --save-dev body-parser express url"
   },
   "keywords": [
     "Azure"
@@ -26,7 +26,7 @@
   "devDependencies": {
     "azure_luis_binder": "^1.0.2",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "request": "^2.88.0",
     "stream-buffers": "^3.0.2",
     "url": "^0.11.0"
