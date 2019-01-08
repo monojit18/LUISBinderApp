@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
-const AZRConstants = require("../commons/AZRConstants");
 const Utils = require("../commons/Utils");
+// const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISIntentService extends AZRLUISBaseService
 {
@@ -16,12 +16,13 @@ class AZRLUISIntentService extends AZRLUISBaseService
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.performGetIntentAsync = function(luisBinderProxy,
-                                                entityOption, request,
-                                                response, responseCallback)
+        this.performGetIntentAsync = (luisBinderProxy,
+                                        entityOption, request,
+                                        response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -59,12 +60,46 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
         };
 
-        this.performCreateIntentAsync = function(luisBinderProxy,
-                                                    entityOption, request,
-                                                    response, responseCallback)
+        this.performGetAllIntentsAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                _self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let queryDictionary = request.query;
+            let limitInfo = _self.extractLimits(queryDictionary);
+            
+            appConfigInfo.entityOption = entityOption;
+            luisBinderProxy.getAllIntentsAsync(appConfigInfo,
+                                                limitInfo
+                                                .skipLimitString,
+                                                limitInfo
+                                                .takeLimitString,
+                                                (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+
+        };
+
+        this.performCreateIntentAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
+        {
+
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -84,12 +119,13 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
         };
 
-        this.performUpdateIntentAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performUpdateIntentAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -128,12 +164,13 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
         };
 
-        this.performDeleteIntentAsync = function(luisBinderProxy,
-                                                    entityOption, request,
-                                                    response, responseCallback)
+        this.performDeleteIntentAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -177,7 +214,7 @@ class AZRLUISIntentService extends AZRLUISBaseService
     {
 
         const self = this;
-        this.routerInfo.put("/:versionId/intents/:intentId",
+        this.routerInfo.get("/:versionId/intents/:intentId",
                             (request, response) =>
         {
 
@@ -189,10 +226,36 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performGetIntentAsync(luisBinderProxy,
                                         luisBinderProxy.entityOptions
                                                         .KIntent,
+                                                        request, response,
+                                                        responseCallback);
+            
+        });
+    }
+
+    getAllIntentsAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.get("/:versionId/intents",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performGetAllIntentsAsync(luisBinderProxy,
+                                            luisBinderProxy.entityOptions
+                                                            .KGetIntents,
                                                         request, response,
                                                         responseCallback);
             
@@ -215,7 +278,7 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateIntentAsync(luisBinderProxy,
                                             luisBinderProxy.entityOptions
                                                             .KIntents,
@@ -241,10 +304,60 @@ class AZRLUISIntentService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateIntentAsync(luisBinderProxy,
                                             luisBinderProxy.entityOptions
                                                             .KPrebuiltIntents,
+                                                            request, response,
+                                                            responseCallback);            
+        });
+    }
+
+    renameIntentAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.post("/:versionId/intents/:intentId/rename",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performUpdateIntentAsync(luisBinderProxy,
+                                            luisBinderProxy.entityOptions
+                                                            .KIntent,
+                                                            request, response,
+                                                            responseCallback);            
+        });
+    }
+
+    deleteIntentAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.delete("/:versionId/intents/:intentId/delete",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performDeleteIntentAsync(luisBinderProxy,
+                                            luisBinderProxy.entityOptions
+                                                            .KIntent,
                                                             request, response,
                                                             responseCallback);            
         });

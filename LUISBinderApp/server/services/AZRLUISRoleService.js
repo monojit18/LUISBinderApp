@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
-const AZRConstants = require("../commons/AZRConstants");
 const Utils = require("../commons/Utils");
+// const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISRoleService extends AZRLUISBaseService
 {
@@ -16,12 +16,13 @@ class AZRLUISRoleService extends AZRLUISBaseService
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.performGetEntityRoleAsync = function(luisBinderProxy,
-                                                entityOption, request,
-                                                response, responseCallback)
+        this.performGetEntityRoleAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -69,12 +70,13 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
         };
 
-        this.performCreateEntityRoleAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performCreateEntityRoleAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -113,12 +115,13 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
         };
 
-        this.performUpdateEntityRoleAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performUpdateEntityRoleAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -166,12 +169,13 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
         };
 
-        this.performDeleteEntityRoleAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performDeleteEntityRoleAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response);
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
 
@@ -237,7 +241,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performGetEntityRoleAsync(luisBinderProxy,
                                             luisBinderProxy.entityOptions.KEntityRole,
                                             request, response, responseCallback);
@@ -261,7 +265,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KEntityRoles,
@@ -287,7 +291,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KEntityRole,
@@ -313,7 +317,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KEntityRole,
@@ -339,7 +343,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KCompositeEntityRoles,
@@ -365,7 +369,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KCompositeEntityRole,
@@ -391,7 +395,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KCompositeEntityRole,
@@ -417,7 +421,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KListEntityRoles,
@@ -443,7 +447,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KListEntityRole,
@@ -469,7 +473,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KListEntityRole,
@@ -495,7 +499,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KHierarchialEntityRoles,
@@ -521,7 +525,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KHierarchialEntityRole,
@@ -547,7 +551,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KHierarchialEntityRole,
@@ -573,7 +577,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KRegExEntityRoles,
@@ -599,7 +603,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KRegExEntityRole,
@@ -625,7 +629,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityRoleAsync(luisBinderProxy,
                                                 luisBinderProxy.entityOptions
                                                                 .KRegExEntityRole,
