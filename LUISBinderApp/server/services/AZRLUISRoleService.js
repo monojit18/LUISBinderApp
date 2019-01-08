@@ -21,7 +21,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
                                             response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -75,7 +75,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
                                                 response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -120,7 +120,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
                                                 response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -174,7 +174,7 @@ class AZRLUISRoleService extends AZRLUISBaseService
                                                 response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {

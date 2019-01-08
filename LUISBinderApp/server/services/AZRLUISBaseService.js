@@ -45,7 +45,7 @@ class AZRLUISBaseService
             if (Utils.isNullOrEmptyString(luisEndpointKeyString) === false)
                 endpointKeyString = luisEndpointKeyString;
             else
-                endpointKeyString = AZRConstants.LUISHeaders.KStarterKey;
+                endpointKeyString = AZRConstants.LUISHeaders.KSubscriptionKey;
 
             let subscriptionKeyString = process.env[endpointKeyString];
             if (Utils.isNullOrEmptyString(subscriptionKeyString) == true)
@@ -78,13 +78,16 @@ class AZRLUISBaseService
             
         };
 
-        this.prepareAppconfig = (request, response, responseCallback) =>
+        this.prepareAppConfig = (request, response, responseCallback) =>
         {
 
             if ((request === null) || (request === undefined))
                 return null;
 
-            let appIdString = request.get(AZRConstants.LUISHeaders.KAppId);
+            let appIdString = process.env[AZRConstants.LUISHeaders.KAppId];
+            if (Utils.isNullOrEmptyString(appIdString) === true)            
+                appIdString = request.get(AZRConstants.LUISHeaders.KAppId);
+            
             if (Utils.isNullOrEmptyString(appIdString) === true)
             {
 

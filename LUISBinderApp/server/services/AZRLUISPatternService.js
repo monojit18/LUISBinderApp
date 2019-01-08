@@ -26,7 +26,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -61,7 +61,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -99,7 +99,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -129,7 +129,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -158,7 +158,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                                 (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {

@@ -8,6 +8,7 @@ class AZRLUISServer
                 
         const nodeModulesPathString = "../node_modules/";  
         const Http = require("http");
+        const Path = require("path");
         const BodyParser = require(nodeModulesPathString + "body-parser");
         const Express = require(nodeModulesPathString + "express");
         const AZRConstants = require("./commons/AZRConstants");
@@ -19,6 +20,7 @@ class AZRLUISServer
         const AZRLUISTrainRouter = require("./routers/AZRLUISTrainRouter");
         const AZRLUISPredictionRouter = require("./routers/AZRLUISPredictionRouter");
         const LUISBinderProxy = require(nodeModulesPathString + "azure_luis_binder");
+        const DotEnv = require(nodeModulesPathString + "dotenv");
 
         const _self = this;
         let _express = Express();
@@ -41,6 +43,9 @@ class AZRLUISServer
             }));
 
             _express.use(BodyParser.text());
+
+            const ENV_FILE = Path.join(__dirname, "../.env");
+            DotEnv.config({ path: ENV_FILE });
             
         };
         

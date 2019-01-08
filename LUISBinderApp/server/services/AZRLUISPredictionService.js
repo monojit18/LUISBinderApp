@@ -17,13 +17,16 @@ class AZRLUISPredictionService extends AZRLUISBaseService
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.prepareAppconfig = (request, response, responseCallback) =>
+        this.prepareAppConfig = (request, response, responseCallback) =>
         {
 
             if ((request === null) || (request === undefined))
                 return null;
 
-            let appIdString = request.get(AZRConstants.LUISHeaders.KAppId);
+            let appIdString = process.env[AZRConstants.LUISHeaders.KAppId];
+            if (Utils.isNullOrEmptyString(appIdString) === true)            
+                appIdString = request.get(AZRConstants.LUISHeaders.KAppId);
+                
             if (Utils.isNullOrEmptyString(appIdString) === true)
             {
 
@@ -43,7 +46,7 @@ class AZRLUISPredictionService extends AZRLUISBaseService
                                           response, responseCallback) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -81,7 +84,7 @@ class AZRLUISPredictionService extends AZRLUISBaseService
             
             let luisBinderProxy = self.prepareLUISClient(request, AZRConstants
                                                                     .LUISHeaders
-                                                                    .KSubscriptionKey);
+                                                                    .KStarterKey);
             self.performGetPredictionsAsync(luisBinderProxy,
                                             request, response,
                                             responseCallback);
