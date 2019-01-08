@@ -20,7 +20,7 @@ class AZRLUISServer
         const AZRLUISTrainRouter = require("./routers/AZRLUISTrainRouter");
         const AZRLUISPredictionRouter = require("./routers/AZRLUISPredictionRouter");
         const LUISBinderProxy = require(nodeModulesPathString + "azure_luis_binder");
-        const DotEnv = require(nodeModulesPathString + "dotenv"); // env
+        const DotEnv = require(nodeModulesPathString + "dotenv");
 
         const _self = this;
         let _express = Express();
