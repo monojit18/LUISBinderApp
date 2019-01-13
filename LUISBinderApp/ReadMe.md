@@ -23,7 +23,6 @@ API Endpoints:
     {
         "name": "DayOfWeek"
     }
-   
 
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/update*
@@ -89,41 +88,41 @@ API Endpoints:
 
 ### body
 
- {
-    "name": "States",
-    "subLists": [
-      {
-        "canonicalForm": "new york",
-        "list": [
-          "ny",
-          "new york"
+    {
+        "name": "States",
+        "subLists": [
+          {
+            "canonicalForm": "new york",
+            "list": [
+              "ny",
+              "new york"
+            ]
+          },
+          {
+            "canonicalForm": "washington",
+            "list": [
+              "washington",
+              "wa"
+            ]
+          },
+          {
+            "canonicalForm": "california",
+            "list": [
+              "california",
+              "ca",
+              "calif.",
+              "cal."
+            ]
+          },
+          {
+            "canonicalForm": "Texas",
+            "list": [
+              "Texas",
+              "TX"
+            ]
+          }
         ]
-      },
-      {
-        "canonicalForm": "washington",
-        "list": [
-          "washington",
-          "wa"
-        ]
-      },
-      {
-        "canonicalForm": "california",
-        "list": [
-          "california",
-          "ca",
-          "calif.",
-          "cal."
-        ]
-      },
-      {
-        "canonicalForm": "Texas",
-        "list": [
-          "Texas",
-          "TX"
-        ]
-      }
-    ]
- }
+    }
 
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/list/:entityId/delete*
@@ -133,18 +132,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
       "name" : "To"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/update*
 
 ### body
 
-   {
+    {
       "name" : "Source"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete*
@@ -154,53 +153,53 @@ API Endpoints:
 
 ### body
 
-   {
+    {
       "canonicalForm": "BankName",
       "list": [
         "HSBC",
         "CitiBank"
       ]
-   }
+    }
   
 ### URL - PUT
 *https://<host_server_details>/luis/:versionId/entities/sublists/create*
 
 ### body
 
-   {
+    {
       "canonicalForm": "BankName",
       "list": [
         "HSBC",
         "CitiBank"
       ]
-   }
+    }
   
 ### URL - PUT
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create*
 
 ### body
 
-   {
+    {
       "name" : "datetime"
-   }
+    }
   
 ### URL - PUT
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create*
 
 ### body
 
-   {
+    {
       "name" : "datetime"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/update*
 
 ### body
 
-   {
+    {
       "name" : "datetime"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete*
@@ -210,18 +209,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
       "name" : "To"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/update*
 
 ### body
 
-   {
+    {
       "name" : "Source"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete*
@@ -236,18 +235,19 @@ API Endpoints:
 
 ### body
 
-   {
+    {
       "name" : "intent1"
-   }
+    }
   
 ### URL - PUT
 *https://<host_server_details>/luis/:versionId/prebuiltIntents/create*
 
 ### body
-   {
+
+    {
       "domainName": "Camera",
       "modelName": "CapturePhoto"
-   }
+    }
   
 ## Utterances APIs
 
@@ -345,16 +345,16 @@ API Endpoints:
 
 ### body
 
-   {
+    {
         "statusId": 9,
         "status": "Queued"
-   }
+    }
     OR
 
-   {
+    {
         "statusId": 2,
         "status": "UpToDate"
-   }
+    }
   
 ## Role APIs
 
@@ -366,18 +366,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
         "name": "sample role"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/roles/update*
 
 ### body
 
-   {
+    {
         "name": "new role name"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/roles/delete*
@@ -387,18 +387,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
         "name": "sample role"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/update*
 
 ### body
 
-   {
+    {
         "name": "new role name"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/delete*
@@ -408,18 +408,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
         "name": "sample role"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/update*
 
 ### body
 
-   {
+    {
         "name": "new role name"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/delete*
@@ -429,18 +429,18 @@ API Endpoints:
 
 ### body
 
-   {
+    {
         "name": "sample role"
-   }
+    }
   
 ### URL - POST
 *https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/update*
 
 ### body
 
-   {
+    {
         "name": "new role name"
-   }
+    }
   
 ### URL - DELETE
 *https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/delete*
@@ -458,6 +458,7 @@ API Endpoints:
 *https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/update*
 
 ### body
+
     {
          "name": "new role name"
     }
