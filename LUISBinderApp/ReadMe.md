@@ -7,87 +7,87 @@ Server host address is kept at 0.0.0.0 - so that it can be accesses from contain
 API Endpoints:
 ## Default
 
-URL - https://<host_server_details>
-
-GET request
+### URL - GET
+*https://<host_server_details>*
 
 ## Entity APIs
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId
+### URL - GET
+*https://<host_server_details>/luis/:versionId/entities/:entityId*
 
-GET request
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/create*
 
-URL - https://<host_server_details>/luis/:versionId/entities/create
+### body
 
-PUT request body -
+    {
+        "name": "DayOfWeek"
+    }
+   
 
- {
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/update*
 
-     "name": "DayOfWeek"
+### body -
 
- }
+    {
+        "name": "DayOfWeek"
+    }
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/update
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/delete*
 
-POST request body -
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/composite/create*
 
- {
+### body
 
-     "name": "DayOfWeek"
+    {
+        "name": "Reservation",
+        "children": [ "Location::To", "datetime" ]  
+    }
 
- }
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/composite/:entityId/update*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/delete
+### body
 
-DELETE request
+    {
+       "name": "Reservation",
+       "children": [ "Location::To" ]
+    }
 
-URL - https://<host_server_details>/luis/:versionId/entities/composite/create
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/composite/:entityId/delete*
 
-PUT request body
+## URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/list/create*
 
- {
+### body
 
-    "name": "Reservation",
-    "children": [ "Location::To", "datetime" ]
-    
-}
+    {
+       "name": "States",
+       "sublists": 
+       [
+         {
+           "canonicalForm": "New York",
+           "list": [ "NY", "New York" ]
+         },
+         {
+           "canonicalForm": "Washington",
+           "list": [ "Washington", "WA" ]
+         },
+         {
+           "canonicalForm": "California",
+           "list": [ "California", "CA", "Calif.", "Cal." ]
+         }
+       ]
+    }
 
-URL - https://<host_server_details>/luis/:versionId/entities/composite/:entityId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/list/:entityId/update*
 
- {
-    "name": "Reservation",
-    "children": [ "Location::To" ]
-    
-}
-
-URL - https://<host_server_details>/luis/:versionId/entities/composite/:entityId/delete
-DELETE request
-
-URL - https://<host_server_details>/luis/:versionId/entities/list/create
-PUT request body
-
- {
-    "name": "States",
-    "sublists": 
-    [
-      {
-        "canonicalForm": "New York",
-        "list": [ "NY", "New York" ]
-      },
-      {
-        "canonicalForm": "Washington",
-        "list": [ "Washington", "WA" ]
-      },
-      {
-        "canonicalForm": "California",
-        "list": [ "California", "CA", "Calif.", "Cal." ]
-      }
-    ]
- }
-
-URL - https://<host_server_details>/luis/:versionId/entities/list/:entityId/update
-POST request body
+### body
 
  {
     "name": "States",
@@ -125,27 +125,34 @@ POST request body
     ]
  }
 
-URL - https://<host_server_details>/luis/:versionId/entities/list/:entityId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/list/:entityId/delete*
 
-URL - https://<host_server_details>/luis/:versionId/entities/hierarchial/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/hierarchial/create*
+
+### body
 
    {
       "name" : "To"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/update*
+
+### body
+
    {
       "name" : "Source"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/hierarchial/:entityId/delete*
 
-URL - https://<host_server_details>/luis/:versionId/entities/sublists/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/sublists/create*
+
+### body
 
    {
       "canonicalForm": "BankName",
@@ -155,8 +162,11 @@ PUT request body
       ]
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/sublists/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/sublists/create*
+
+### body
+
    {
       "canonicalForm": "BankName",
       "list": [
@@ -165,57 +175,75 @@ PUT request body
       ]
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create
-PUT request body
-   {
-      "name" : "datetime"
-   }
-  
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create
-PUT request body
-   {
-      "name" : "datetime"
-   }
-  
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/update
-POST request body
-   {
-      "name" : "datetime"
-   }
-  
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete
-DELETE request
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/create
-PUT request body
+### body
+
+   {
+      "name" : "datetime"
+   }
+  
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/create*
+
+### body
+
+   {
+      "name" : "datetime"
+   }
+  
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/update*
+
+### body
+
+   {
+      "name" : "datetime"
+   }
+  
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/:childEntityId/delete*
+
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/create*
+
+### body
 
    {
       "name" : "To"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/update*
+
+### body
+
    {
       "name" : "Source"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/:childEntityId/delete*
 
 ## Intent APIs
 
-URL - https://<host_server_details>/luis/:versionId/intents/:intentId
-GET request
+### URL - GET
+*https://<host_server_details>/luis/:versionId/intents/:intentId*
 
-URL - https://<host_server_details>/luis/:versionId/intents/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/intents/create*
+
+### body
 
    {
       "name" : "intent1"
    }
   
-URL - https://<host_server_details>/luis/:versionId/prebuiltIntents/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/prebuiltIntents/create*
+
+### body
    {
       "domainName": "Camera",
       "modelName": "CapturePhoto"
@@ -223,90 +251,99 @@ PUT request body
   
 ## Utterances APIs
 
-URL - https://<host_server_details>/luis/:versionId/patterns
-GET request
+### URL - GET
+*https://<host_server_details>/luis/:versionId/patterns*
 
-URL - https://<host_server_details>/luis/:versionId/intents/:intentId/patterns
-GET request
+### URL - GET
+*https://<host_server_details>/luis/:versionId/intents/:intentId/patterns*
 
-URL - https://<host_server_details>/luis/:versionId/train
-GET request
+### URL - GET
+*https://<host_server_details>/luis/:versionId/train*
 
-URL - https://<host_server_details>/luis/:versionId/examples
-GET request
+### URL - GET
+*https://<host_server_details>/luis/:versionId/examples*
 
-URL - https://<host_server_details>/luis/:versionId/labels/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/labels/create*
 
-  [
-    {
-      "text": "Book me a flight from Cairo to Redmond next Thursday",
-      "intentName": "BookFlight",
-      "entityLabels":
-      [
+### body
+
+    [
         {
-          "entityName": "Location::From",
-          "startCharIndex": 22,
-          "endCharIndex": 26
+          "text": "Book me a flight from Cairo to Redmond next Thursday",
+          "intentName": "BookFlight",
+          "entityLabels":
+          [
+            {
+              "entityName": "Location::From",
+              "startCharIndex": 22,
+              "endCharIndex": 26
+            },
+            {
+              "entityName": "Location::To",
+              "startCharIndex": 31,
+              "endCharIndex": 37
+            }
+          ]
         },
         {
-          "entityName": "Location::To",
-          "startCharIndex": 31,
-          "endCharIndex": 37
+          "text": "What's the weather like in Seattle?",
+          "intentName": "GetWeather",
+          "entityLabels":
+          [
+            {
+              "entityName": "Location",
+              "startCharIndex": 27,
+              "endCharIndex": 33
+            }
+          ]
         }
-      ]
-    },
-    {
-      "text": "What's the weather like in Seattle?",
-      "intentName": "GetWeather",
-      "entityLabels":
-      [
-        {
-          "entityName": "Location",
-          "startCharIndex": 27,
-          "endCharIndex": 33
-        }
-      ]
-    }
-  ]
+    ]
   
-URL - https://<host_server_details>/luis/:versionId/labels/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/labels/delete*
 
-URL - https://<host_server_details>/luis/:versionId/patterns/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/patterns/create*
 
-   [
-      {
-          "pattern": "Who's reporting to {Name}",
-          "intent": "report to name"
-      },
-      {
-          "pattern": "Who's {Name} reporting to?",
-          "intent": "name report to"
-      }
-  ]
+### body
+
+    [
+       {
+           "pattern": "Who's reporting to {Name}",
+           "intent": "report to name"
+       },
+       {
+           "pattern": "Who's {Name} reporting to?",
+           "intent": "name report to"
+       }
+    ]
   
-URL - https://<host_server_details>/luis/:versionId/patterns/update
-POST request body
-   [
-      {
-          "id": "16cfbc93-4065-445f-b06e-00cebdae11c4",
-          "pattern": "Who's reporting to {Name}",
-          "intent": "new intent"
-      },
-      {
-          "id": "1d026f03-5942-4d0d-9153-1c01301e1429",
-          "pattern": "Who's {Name} reporting to?",
-          "intent": "new intent"
-      }
-  ]
-  
-URL - https://<host_server_details>/luis/:versionId/patterns/delete
-DELETE request
+### URL - POST
+*https://<host_server_details>/luis/:versionId/patterns/update*
 
-URL - https://<host_server_details>/luis/:versionId/train
-POST request body
+### body
+
+    [
+       {
+           "id": "16cfbc93-4065-445f-b06e-00cebdae11c4",
+           "pattern": "Who's reporting to {Name}",
+           "intent": "new intent"
+       },
+       {
+           "id": "1d026f03-5942-4d0d-9153-1c01301e1429",
+           "pattern": "Who's {Name} reporting to?",
+           "intent": "new intent"
+       }
+    ]
+  
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/patterns/delete*
+
+### URL - POST
+*https://<host_server_details>/luis/:versionId/train*
+
+### body
 
    {
         "statusId": 9,
@@ -321,93 +358,120 @@ POST request body
   
 ## Role APIs
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/:roleId
-GET request-
+### URL - GET
+*https://<host_server_details>/luis/:versionId/entities/:entityId/roles/:roleId*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/roles/create*
 
-   {
-        "name": "sample role"
-   }
-  
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/update
-POST request body
-   {
-        "name": "new role name"
-   }
-  
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/roles/delete
-DELETE request
-
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/create
-PUT request body-
+### body
 
    {
         "name": "sample role"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/roles/update*
+
+### body
+
    {
         "name": "new role name"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/roles/delete*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/create*
+
+### body
 
    {
         "name": "sample role"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/update*
+
+### body
+
    {
         "name": "new role name"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/composite/roles/:roleId/delete*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/create*
+
+### body
 
    {
         "name": "sample role"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/update*
+
+### body
+
    {
         "name": "new role name"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/list/roles/:roleId/delete*
 
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/create*
+
+### body
 
    {
         "name": "sample role"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/update
-POST request body
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/update*
+
+### body
+
    {
         "name": "new role name"
    }
   
-URL - https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/delete
-DELETE request
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/hierarchial/roles/:roleId/delete*
+
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/create*
+
+### body
+
+    {
+        "name": "sample role"
+    }
+  
+### URL - POST
+*https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/update*
+
+### body
+    {
+         "name": "new role name"
+    }
+  
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/entities/:entityId/regex/roles/:roleId/delete*
 
 ## Patterns APIs
 
-URL - https://<host_server_details>/luis/:versionId/patterns/create
-PUT request body
+### URL - PUT
+*https://<host_server_details>/luis/:versionId/patterns/create*
+
+### body
+
     [
         {
             "pattern": "Who's reporting to {Entity_NEW}?",
