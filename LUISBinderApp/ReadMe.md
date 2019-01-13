@@ -7,37 +7,49 @@ Server host address is kept at 0.0.0.0 - so that it can be accesses from contain
 API Endpoints:
 ## Default
 
-URL - https://<host_server_details> 
+URL - https://<host_server_details>
+
 GET request
 
 ## Entity APIs
 
 URL - https://<host_server_details>/luis/:versionId/entities/:entityId
+
 GET request
 
 URL - https://<host_server_details>/luis/:versionId/entities/create
+
 PUT request body -
 
  {
+
      "name": "DayOfWeek"
+
  }
 
 URL - https://<host_server_details>/luis/:versionId/entities/:entityId/update
+
 POST request body -
 
  {
+
      "name": "DayOfWeek"
+
  }
 
 URL - https://<host_server_details>/luis/:versionId/entities/:entityId/delete
+
 DELETE request
 
 URL - https://<host_server_details>/luis/:versionId/entities/composite/create
+
 PUT request body
 
  {
+
     "name": "Reservation",
     "children": [ "Location::To", "datetime" ]
+    
 }
 
 URL - https://<host_server_details>/luis/:versionId/entities/composite/:entityId/update
