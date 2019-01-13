@@ -479,3 +479,49 @@ API Endpoints:
             "intent": "Intent_NEW"
         }
     ]
+
+### URL - DELETE
+*https://<host_server_details>/luis/:versionId/patterns/delete*
+
+### URL - GET
+*https://<host_server_details>/luis/:versionId/intents/:intentId/patterns*
+
+### URL - GET
+*https://<host_server_details>/luis/:versionId/patterns*
+
+### URL - POST
+*https://<host_server_details>/luis/:versionId/patterns/update*
+
+### body
+    [
+        {
+            "id": "16cfbc93-4065-445f-b06e-00cebdae11c4",
+            "pattern": "Who's reporting to {Name}",
+            "intent": "new intent"
+        },
+        {
+            "id": "1d026f03-5942-4d0d-9153-1c01301e1429",
+            "pattern": "Who's {Name} reporting to?",
+            "intent": "new intent"
+        }
+    ]
+
+## Prediction APIs
+
+### URL - POST
+*https://<host_server_details>/luis/predictions*
+
+### body
+
+    {
+        "question": <Question>,
+            
+    }
+
+## Train APIs
+
+### URL - GET
+*https://<host_server_details>/luis/:versionId/train*
+
+### URL - POST
+*https://<host_server_details>/luis/:versionId/train*
