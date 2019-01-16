@@ -1,6 +1,6 @@
 {
   "name": "azure_luis_server",
-  "version": "1.0.0",
+  "version": "2.0.2",
   "description": "",
   "author": "Monojit Datta",
   "license": "MIT",
@@ -14,8 +14,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save-dev body-parser express url dotenv"
+    "preinstall": "mkdir -p logs",
+    "install": "npm install --unsafe-perm --save-dev body-parser express url dotenv grunt grunt-contrib-jshint grunt-contrib-watch grunt-run",
+    "postinstall": "npm link utility_helper azure_luis_binder",
+    "start": "node server/AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1"
   },
   "keywords": [
     "Azure"
@@ -27,6 +29,10 @@
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-run": "^0.8.1",
     "url": "^0.11.0"
   },
   "dependencies": {}
