@@ -2,8 +2,8 @@
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
 const AZRConstants = require("../commons/AZRConstants");
-// const Utils = require("../commons/Utils");
-const Utils = require("../../node_modules/utility_helper");
+const Utils = require("../commons/Utils");
+// const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISPredictionService extends AZRLUISBaseService
 {

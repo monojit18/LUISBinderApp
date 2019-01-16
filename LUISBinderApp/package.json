@@ -13,9 +13,9 @@
     }
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",        
+    "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "mkdir -p logs",
-    "install": "npm install --unsafe-perm --save express body-parser azure_luis_binder url dotenv grunt grunt-contrib-jshint grunt-contrib-watch grunt-run",    
+    "install": "npm install --unsafe-perm --save express body-parser azure_luis_binder url dotenv grunt grunt-contrib-jshint grunt-contrib-watch grunt-run",
     "start": "node server/AZRLUISServer.js 1> logs/AZRLUISServer.log 2>& 1"
   },
   "keywords": [
@@ -25,7 +25,7 @@
     "node": ">=8.9.3"
   },
   "dependencies": {
-    "azure_luis_binder": "^1.0.2",
+    "azure_luis_binder": "^1.1.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",

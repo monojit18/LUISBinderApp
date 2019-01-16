@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
-// const Utils = require("../commons/Utils");
-const Utils = require("../../node_modules/utility_helper");
+const Utils = require("../commons/Utils");
+// const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISTrainService extends AZRLUISBaseService
 {
