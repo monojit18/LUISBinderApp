@@ -3,7 +3,6 @@
 const KBase64Key = "base64";
 const KUploadLimit = "1000mb";
 
-
 const ExceptionMessages =
 {
 
@@ -26,8 +25,8 @@ const DefaultResponseMessages =
 const LUISEnvironments =
 {
 
-    KAccountKey : "ACCOUNT_KEY",
-    KRegionKey : "REGION_KEY"
+    KAccountKey : "Account_Key",
+    KRegionKey : "Region"
         
 };
 
@@ -35,7 +34,8 @@ const LUISHeaders =
 {
 
     KSubscriptionKey : "Ocp-Apim-Subscription-Key",
-    KRegionKey : "Region",
+    KStarterKey : "STARTER_KEY",
+    KRegionKey : "REGION_KEY",
     KAppId : "appId"
         
 };
@@ -55,11 +55,7 @@ const HttpStatusCodes =
 
 class AZRConstants
 {
-        
-    static get AccountKey()                 { return KAccountKey; }
-    static get RegionName()                 { return KRegionName; }
-    static get RegionKey()                  { return KRegionKey; }
-    static get ContentModeratorApiKey()     { return KContentModeratorApiKey; }
+    
     static get Base64Key()                  { return KBase64Key; }
     static get HttpStatusCodes()            { return HttpStatusCodes; }
     static get ExceptionMessages()          { return ExceptionMessages; }

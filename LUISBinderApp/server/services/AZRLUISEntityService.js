@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
-const AZRConstants = require("../commons/AZRConstants");
+// const Utils = require("../commons/Utils");
 const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISEntityService extends AZRLUISBaseService
@@ -16,12 +16,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
         this.routerInfo = routerInfo;
         this.azureLUISProxy = azureLUISProxy;
 
-        this.performGetEntityAsync = function(luisBinderProxy,
-                                                entityOption, request,
-                                                response, responseCallback)
+        this.performGetEntityAsync = (luisBinderProxy,
+                                        entityOption, request,
+                                        response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -50,7 +50,41 @@ class AZRLUISEntityService extends AZRLUISBaseService
             }
             
             appConfigInfo.entityOption = entityOption;
-            luisBinderProxy.getEntityAsync(appConfigInfo, entityIdString,
+            luisBinderProxy.getEntityAsync(appConfigInfo,
+                                            entityIdString,
+                                            (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+
+        };
+
+        this.performGetAllEntitiesAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
+        {
+
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                _self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+            
+            let queryDictionary = request.query;
+            let limitInfo = _self.extractLimits(queryDictionary);
+
+            appConfigInfo.entityOption = entityOption;
+            luisBinderProxy.getAllEntitiesAsync(appConfigInfo,
+                                                limitInfo
+                                                .skipLimitString,
+                                                limitInfo
+                                                .takeLimitString,
                                                 (responseBody, error) =>
             {
 
@@ -60,12 +94,57 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performCreateEntityAsync = function(luisBinderProxy,
+        this.performGetHierarchialEntityAsync = (luisBinderProxy,
                                                     entityOption, request,
-                                                    response, responseCallback)
+                                                    response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
+                                                        responseCallback);
+            if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
+            {
+
+                _self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+            
+            let paramsDictionary = request.params;
+            if (Utils.isValidNonEmptyDictionary(paramsDictionary) === false)
+            {
+
+                _self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+            
+            let hierarchialEntityIdString = paramsDictionary.hierarchialEntityId;
+            if (Utils.isNullOrEmptyString(hierarchialEntityIdString) === true)
+            {
+
+                _self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+            
+            appConfigInfo.entityOption = entityOption;
+            luisBinderProxy.getHierarchialEntityAsync(appConfigInfo,
+                                                        hierarchialEntityIdString,
+                                                        (responseBody, error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+
+        };
+
+        this.performCreateEntityAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
+        {
+
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -86,12 +165,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performUpdateEntityAsync = function(luisBinderProxy,
-                                                    entityOption, request,
-                                                    response, responseCallback)
+        this.performUpdateEntityAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -131,12 +210,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performDeleteEntityAsync = function(luisBinderProxy,
-                                                    entityOption, request,
-                                                    response, responseCallback)
+        this.performDeleteEntityAsync = (luisBinderProxy,
+                                            entityOption, request,
+                                            response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -175,12 +254,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performCreateChildEntityAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performCreateChildEntityAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -220,12 +299,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performUpdateChildEntityAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performUpdateChildEntityAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -274,12 +353,12 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
         };
 
-        this.performDeleteChildEntityAsync = function(luisBinderProxy,
-                                                        entityOption, request,
-                                                        response, responseCallback)
+        this.performDeleteChildEntityAsync = (luisBinderProxy,
+                                                entityOption, request,
+                                                response, responseCallback) =>
         {
 
-            let appConfigInfo = _self.prepareAppconfig(request, response, 
+            let appConfigInfo = _self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -345,10 +424,98 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performGetEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions.KEntity,
-                                            request, response, responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
+            
+        });
+    }
+
+    getAllEntitiesAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.get("/:versionId/entities",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performGetAllEntitiesAsync(luisBinderProxy,
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KGetEntities,
+                                            request,
+                                            response,
+                                            responseCallback);
+            
+        });
+    }
+
+    getHierarchialEntityAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.get("/:versionId/hierarchial/entities/:hierarchialEntityId",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performGetHierarchialEntityAsync(luisBinderProxy,
+                                                    luisBinderProxy
+                                                    .entityOptions
+                                                    .KHierarchialEntity,
+                                                    request,
+                                                    response,
+                                                    responseCallback);
+            
+        });
+    }
+
+    getAllHierarchialEntitiesAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.get("/:versionId/hierarchial/entities",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let luisBinderProxy = self.prepareLUISClient(request);
+            self.performGetAllEntitiesAsync(luisBinderProxy,
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KGetHierarchialEntities,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -369,10 +536,13 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions.KEntities,
-                                            request, response, responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KEntities,
+                                            request, response,
+                                            responseCallback);
             
         });
     }
@@ -393,10 +563,13 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions.KEntity,
-                                            request, response,
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KEntity,
+                                            request,
+                                            response,
                                             responseCallback);
             
         });
@@ -427,9 +600,11 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
             
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions.KEntity,
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KEntity,
                                             request, response,
                                             responseCallback);
             
@@ -444,12 +619,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KCompositeEntities,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KCompositeEntities,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -470,12 +647,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KCompositeEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KCompositeEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -496,12 +675,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KCompositeEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KCompositeEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -514,12 +695,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KListEntities,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KListEntities,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -540,12 +723,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KListEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KListEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -566,12 +751,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KListEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KListEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -584,11 +771,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                            .KHierarchialEntities, request,
-                                            response, responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KHierarchialEntities,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -609,12 +799,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KHierarchialEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KHierarchialEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -635,12 +827,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteEntityAsync(luisBinderProxy,
-                                            luisBinderProxy.entityOptions
-                                                            .KHierarchialEntity,
-                                                            request, response,
-                                                            responseCallback);
+                                            luisBinderProxy
+                                            .entityOptions
+                                            .KHierarchialEntity,
+                                            request,
+                                            response,
+                                            responseCallback);
             
         });
     }
@@ -661,12 +855,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                                .KSubListEntities,
-                                                                request, response,
-                                                                responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KSubListEntities,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -679,11 +875,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KCompositeChildEntities, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KCompositeChildEntities,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -696,11 +895,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KCompositeChildEntity, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KCompositeChildEntity,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -713,11 +915,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KCompositeChildEntity, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KCompositeChildEntity,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -730,11 +935,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performCreateChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KHierarchialEntities, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KHierarchialEntities,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -747,11 +955,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performUpdateChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KHierarchialChildEntity, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KHierarchialChildEntity,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }
@@ -764,11 +975,14 @@ class AZRLUISEntityService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             self.performDeleteChildEntityAsync(luisBinderProxy,
-                                                luisBinderProxy.entityOptions
-                                                .KHierarchialChildEntity, request,
-                                                response, responseCallback);
+                                                luisBinderProxy
+                                                .entityOptions
+                                                .KHierarchialChildEntity,
+                                                request,
+                                                response,
+                                                responseCallback);
             
         });
     }

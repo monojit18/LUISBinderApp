@@ -11,12 +11,18 @@ class AZRLUISEntityRouter extends AZRLUISBaseRouter
         
         super();
         
-        this.prepareLUISEntityService = function()
+        this.prepareLUISEntityService = () =>
         {
             
             let luisEntityService = new AZRLUISEntityService(routerInfo, AZRLUISProxy);
             luisEntityService.createEntityAsync(this.responseCallback);
+            luisEntityService.createListEntityAsync(this.responseCallback);
+            luisEntityService.createCompositeEntityAsync(this.responseCallback);
+            luisEntityService.createHierarchialEntityAsync(this.responseCallback);
             luisEntityService.getEntityAsync(this.responseCallback);
+            luisEntityService.getAllEntitiesAsync(this.responseCallback);
+            luisEntityService.getHierarchialEntityAsync(this.responseCallback);
+            luisEntityService.getAllHierarchialEntitiesAsync(this.responseCallback);
             luisEntityService.renameEntityAsync(this.responseCallback);
             luisEntityService.deleteEntityAsync(this.responseCallback);
             

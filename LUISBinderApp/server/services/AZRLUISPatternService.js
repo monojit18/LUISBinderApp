@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 const AZRLUISBaseService = require("./AZRLUISBaseService");
+// const Utils = require("../commons/Utils");
 const Utils = require("../../node_modules/utility_helper");
 
 class AZRLUISPatternService extends AZRLUISBaseService
@@ -25,7 +26,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -38,7 +39,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
             let queryDictionary = request.query;
             let limitInfo = self.extractLimits(queryDictionary);
             
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.getPatternsAsync(appConfigInfo, limitInfo
                                                             .skipLimitString,
                                                             limitInfo
@@ -60,7 +61,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -79,9 +80,9 @@ class AZRLUISPatternService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
-            luisBinderProxy.getPatternsAsync(appConfigInfo, intentIdString,                                            
-                                            (responseBody, error) =>
+            let luisBinderProxy = self.prepareLUISClient(request);
+            luisBinderProxy.getIntentPatternsAsync(appConfigInfo, intentIdString,                                            
+                                                    (responseBody, error) =>
             {
 
                 responseCallback(response, responseBody, error);
@@ -98,7 +99,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -108,7 +109,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.addPatternsAsync(appConfigInfo, request.body,
                                             (responseBody, error) =>
             {
@@ -128,7 +129,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                             (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -138,7 +139,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.updatePatternsAsync(appConfigInfo, request.body,
                                                 (responseBody, error) =>
             {
@@ -157,7 +158,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
                                 (request, response) =>
         {
 
-            let appConfigInfo = self.prepareAppconfig(request, response, 
+            let appConfigInfo = self.prepareAppConfig(request, response, 
                                                         responseCallback);
             if (Utils.isValidNonEmptyDictionary(appConfigInfo) === false)
             {
@@ -167,7 +168,7 @@ class AZRLUISPatternService extends AZRLUISBaseService
 
             }
 
-            let luisBinderProxy = self.pepareLUISClient(request);
+            let luisBinderProxy = self.prepareLUISClient(request);
             luisBinderProxy.deletePatternsAsync(appConfigInfo, request.body,
                                                 (responseBody, error) =>
             {
